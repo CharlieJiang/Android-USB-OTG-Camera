@@ -34,11 +34,12 @@ public class Mp4MediaMuxer {
         String mFilePath;
         this.isVoiceClose = isVoiceClose;
         this.durationMillis = durationMillis;
-        if(durationMillis != 0) {
-            mFilePath = path + "-" + index++ + ".mp4";
-        }else{
-            mFilePath = path+".mp4";
-        }
+        //        if(durationMillis != 0) {
+//            mFilePath = path + "-" + index++ + ".mp4";
+//        }else{
+//            mFilePath = path+".mp4";
+//        }
+        mFilePath = path;
         Object mux = null;
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
