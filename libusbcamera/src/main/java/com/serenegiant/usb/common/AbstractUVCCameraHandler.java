@@ -553,7 +553,14 @@ public abstract class AbstractUVCCameraHandler extends Handler {
             } catch (final IllegalArgumentException e) {
                 try {
                     // fallback to YUV mode
+                    // 获取相机支持的尺寸列表（可能不需要）
+                    List<Size> supportedSizeList = mUVCCamera.getSupportedSizeList();
+                    if(supportedSizeList != null && supportedSizeList.size() > 0) {
+                        mWidth = supportedSizeList.get(0).width;
+                        mHeight = supportedSizeList.get(0).height;
+                    }
                     mUVCCamera.setPreviewSize(mWidth, mHeight, 1, 31, UVCCamera.DEFAULT_PREVIEW_MODE, mBandwidthFactor);
+                    mUVCCamera.setFrameCallback(mIFrameCallback, UVCCamera.PIXEL_FORMAT_YUV420SP);
                 } catch (final IllegalArgumentException e1) {
                     callOnError(e1);
                     return;
